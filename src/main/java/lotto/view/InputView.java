@@ -14,7 +14,7 @@ public class InputView {
     private static final String VALIDATE_WINNING_NUMBERS_FORM = "[ERROR] 잘못된 형식의 당첨번호가 입력되었습니다. 다시 입력해 주세요.";
     private static final String VALIDATE_IS_VALID_RANGE_BONUS_NUMBER = "[ERROR] 잘못된 범위의 보너스 번호가 입력되었습니다. 다시 입력해 주세요.";
     private static final String VALIDATE_IS_INTEGER_BONUS_NUMBER = "[ERROR] 숫자가 아닌 보너스 번호가 입력되었습니다. 다시 입력해 주세요.";
-    private static final String REGEX = "\"^\\\\d+(,\\\\d+)*$\"";
+    private static final String REGEX = "^\\d+(,\\d+)*$";
     private final static int START_NUMBER = 1;
     private final static int END_NUMBER = 45;
 

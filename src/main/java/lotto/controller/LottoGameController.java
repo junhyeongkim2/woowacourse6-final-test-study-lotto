@@ -14,6 +14,9 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoGameController {
+
+    private final String DUPLICATE_BONUS_NUMBER_ERROR_MESSAGE = "[ERROR] 중복된 보너스 번호가 발생했습니다. 다시 입력해 주세요.";
+
     private Order order;
     private Lottos lottos;
     private WinningResult winningResult;
@@ -27,7 +30,8 @@ public class LottoGameController {
     private WinningNumbers readWinningNumbers() {
         List<Integer> winningNumbers = repeatUntilValid(
                 () -> Splitor.splitWiningNumbers(InputView.readWinningNumbers()));
-        int bonusNumber = repeatUntilValid(() -> InputView.readBonusNumber());
+        int bonusNumber = repeatUntilValid(
+                () -> validateDuplicateBonusNumber(winningNumbers, InputView.readBonusNumber()));
         return new WinningNumbers(winningNumbers, bonusNumber);
     }
 
@@ -63,6 +67,13 @@ public class LottoGameController {
             System.out.println(e.getMessage());
             return repeatUntilValid(function);
         }
+    }
+
+    private int validateDuplicateBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER_ERROR_MESSAGE);
+        }
+        return bonusNumber;
     }
 
 
