@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.model.Lotto;
+import lotto.model.WinningResult;
 import lotto.util.LottoNumberGenerator;
 import lotto.model.Lottos;
 import lotto.model.WinningNumbers;
@@ -28,6 +29,10 @@ public class LottoGameController {
 
         WinningNumbers winningNumbers = new WinningNumbers(Splitor.splitWiningNumbers(InputView.readWinningNumbers()),
                 Integer.parseInt(InputView.readBonusNumber()));
+
+        WinningResult winningResult = WinningResult.of(lottos, winningNumbers);
+        OutputView.printWinningresult(winningResult.toString());
+        OutputView.printTotalProfit(winningResult.calculateTotalProfit(buyAmount));
 
 
     }

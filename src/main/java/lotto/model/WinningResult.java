@@ -8,8 +8,6 @@ import java.util.Map;
 
 public class WinningResult {
 
-    private Lottos lottos;
-    private WinningNumbers winningNumbers;
 
     private Map<Rank, Integer> winningResult;
 
@@ -27,7 +25,6 @@ public class WinningResult {
             int matchCount = lottoList.get(i).compareWinningNumbers(winningNumbers);
             boolean isBonus = lottoList.get(i).compareBonusNumbers(winningNumbers);
             Rank rank = Rank.valueOf(matchCount, isBonus);
-            System.out.println(rank);
             winningResult.put(rank, winningResult.get(rank) + 1);
         }
 
@@ -51,5 +48,15 @@ public class WinningResult {
     private double calculateTotalPrize(int buyAmount) {
         return (double) winningResult.entrySet().stream()
                 .mapToInt(key -> key.getValue() * Rank.valueOf(String.valueOf(key.getKey())).getPrize()).sum();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("당첨 통계\n");
+        sb.append("---\n");
+        winningResult.entrySet().stream().filter(key -> key.getKey() != Rank.NONE)
+                .forEach(key -> sb.append(key.getKey().getCategory() + key.getValue() + "개\n"));
+        return sb.toString();
     }
 }
