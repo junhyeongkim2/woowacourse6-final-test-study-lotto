@@ -6,22 +6,32 @@ import java.util.regex.Pattern;
 
 public class InputView {
 
+    private static final String BUY_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String WIINING_NUMBER_MESSAGE = "당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_MESSAGE = "\n보너스 번호를 입력해 주세요.";
+
+    private static final String VALIDATE_READ_BUY_AMOUNT_MESSAGE = "[ERROR] 잘못된 구입금액이 입력되었습니다. 다시 입력해 주세요.";
+    private static final String VALIDATE_WINNING_NUMBERS_FORM = "[ERROR] 잘못된 형식의 당첨번호가 입력되었습니다. 다시 입력해 주세요.";
+    private static final String VALIDATE_IS_VALID_RANGE_BONUS_NUMBER = "[ERROR] 잘못된 범위의 보너스 번호가 입력되었습니다. 다시 입력해 주세요.";
+    private static final String VALIDATE_IS_INTEGER_BONUS_NUMBER = "[ERROR] 숫자가 아닌 보너스 번호가 입력되었습니다. 다시 입력해 주세요.";
+
+
     public static int readBuyAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println(BUY_AMOUNT_MESSAGE);
         String input = Console.readLine();
         validateReadBuyAmount(input);
         return Integer.parseInt(input);
     }
 
     public static String readWinningNumbers() {
-        System.out.println("당첨 번호를 입력해 주세요.");
+        System.out.println(WIINING_NUMBER_MESSAGE);
         String input = Console.readLine();
         validateWinningNumbersForm(input);
         return input;
     }
 
     public static int readBonusNumber() {
-        System.out.println("\n보너스 번호를 입력해 주세요.");
+        System.out.println(BONUS_NUMBER_MESSAGE);
         String input = Console.readLine();
         validateIsValidRangeBonusNumber(input);
         validateIsIntegerBonusNumber(input);
@@ -32,7 +42,7 @@ public class InputView {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 잘못된 구입금액이 입력되었습니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(VALIDATE_READ_BUY_AMOUNT_MESSAGE);
         }
     }
 
@@ -40,13 +50,13 @@ public class InputView {
         Pattern pattern = Pattern.compile("^\\d+(,\\d+)*$");
         Matcher matcher = pattern.matcher(input);
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("[ERROR] 잘못된 형식의 당첨번호가 입력되었습니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(VALIDATE_WINNING_NUMBERS_FORM);
         }
     }
 
     private static void validateIsValidRangeBonusNumber(String input) {
         if (Integer.parseInt(input) < 1 || Integer.parseInt(input) > 45) {
-            throw new IllegalArgumentException("[ERROR] 잘못된 범위의 보너스 번호가 입력되었습니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(VALIDATE_IS_VALID_RANGE_BONUS_NUMBER);
         }
     }
 
@@ -54,7 +64,7 @@ public class InputView {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 숫자가 아닌 보너스 번호가 입력되었습니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(VALIDATE_IS_INTEGER_BONUS_NUMBER);
         }
     }
 

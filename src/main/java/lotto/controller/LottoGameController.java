@@ -25,9 +25,10 @@ public class LottoGameController {
     }
 
     private WinningNumbers readWinningNumbers() {
-        return new WinningNumbers(
-                repeatUntilValid(() -> Splitor.splitWiningNumbers(InputView.readWinningNumbers())),
-                repeatUntilValid(() -> InputView.readBonusNumber()));
+        List<Integer> winningNumbers = repeatUntilValid(
+                () -> Splitor.splitWiningNumbers(InputView.readWinningNumbers()));
+        int bonusNumber = repeatUntilValid(() -> InputView.readBonusNumber());
+        return new WinningNumbers(winningNumbers, bonusNumber);
     }
 
     private void printOrder() {
