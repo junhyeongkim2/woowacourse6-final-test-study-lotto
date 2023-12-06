@@ -41,5 +41,16 @@ class LottoTest {
         assertThat(isBonus).isFalse();
     }
 
+    @DisplayName("로또 번호 오름차순 정렬 테스트")
+    @Test
+    void sortNumbers_EqualNumbers_Success() {
+        //given
+        Lotto lotto;
+        //when
+        lotto = new Lotto(List.of(1, 2, 3, 8, 5, 6));
+        //then
+        assertThat(lotto.getNumbers()).isEqualTo(List.of(1,2,3,5,6,8));
+    }
+
 
 }
