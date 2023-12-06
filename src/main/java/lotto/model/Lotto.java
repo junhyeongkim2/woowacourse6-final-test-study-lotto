@@ -1,10 +1,12 @@
 package lotto.model;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
+
+    private final String DUPLICATE_LOTTO_NUMBER = "[ERROR] 로또 번호에 중복이 발생했습니다.";
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -21,7 +23,7 @@ public class Lotto {
 
     private void validateDuplicate(List<Integer> numbers) {
         if (numbers.size() != numbers.stream().distinct().count()) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호에 중복이 발생했습니다.");
+            throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBER);
         }
     }
 

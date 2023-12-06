@@ -12,7 +12,6 @@ import lotto.model.WinningNumbers;
 import lotto.util.Splitor;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjection.Split;
 
 public class LottoGameController {
     private Order order;
