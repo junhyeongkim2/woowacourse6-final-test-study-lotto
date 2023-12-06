@@ -8,9 +8,16 @@ import java.util.Map;
 
 public class WinningResult {
 
+    private final int PROFIT_RATE_NUMBER = 100;
+    private static final int MAP_STANDARD_SETTING_VALUE = 0;
+
+    private static final String WINNING_RESULT_MESSAGE = "당첨 통계";
+    private static final String SEPERATOR = "---";
+    private static final String QUANITY = "개";
+    private static final String SPACING = "\n";
+
 
     private Map<Rank, Integer> winningResult;
-
 
     private WinningResult(Map<Rank, Integer> winningResult) {
         this.winningResult = winningResult;
@@ -23,7 +30,7 @@ public class WinningResult {
     }
 
     public static void initializeResult(Map<Rank, Integer> winningResult) {
-        Arrays.stream(Rank.values()).forEach(rank -> winningResult.put(rank, 0));
+        Arrays.stream(Rank.values()).forEach(rank -> winningResult.put(rank, MAP_STANDARD_SETTING_VALUE));
     }
 
 
@@ -33,7 +40,7 @@ public class WinningResult {
 
 
     public double calculateTotalProfit(Order order) {
-        return (calculateTotalPrize() / order.getBuyAmount()) * 100;
+        return (calculateTotalPrize() / order.getBuyAmount()) * PROFIT_RATE_NUMBER;
     }
 
     private double calculateTotalPrize() {
@@ -44,10 +51,10 @@ public class WinningResult {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("당첨 통계\n");
-        sb.append("---\n");
+        sb.append(WINNING_RESULT_MESSAGE + SPACING);
+        sb.append(SEPERATOR + SPACING);
         winningResult.entrySet().stream().filter(key -> key.getKey() != Rank.NONE)
-                .forEach(key -> sb.append(key.getKey().getCategory() + key.getValue() + "개\n"));
+                .forEach(key -> sb.append(key.getKey().getCategory() + key.getValue() + QUANITY+SPACING));
         return sb.toString();
     }
 }
