@@ -1,6 +1,8 @@
 package lotto.model;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningNumbers {
 
@@ -12,6 +14,7 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
+
     public boolean isContain(int lottoNumber) {
         return winningNumbers.contains(lottoNumber);
     }
@@ -19,4 +22,5 @@ public class WinningNumbers {
     public boolean isBonus(int lottoNumber) {
         return lottoNumber == bonusNumber;
     }
+
 }
