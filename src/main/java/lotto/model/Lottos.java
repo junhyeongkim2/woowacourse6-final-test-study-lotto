@@ -16,12 +16,7 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
-    }
-
-    public boolean isBonusNumber(WinningNumbers winningNumbers) {
-        return false;
     }
 }
