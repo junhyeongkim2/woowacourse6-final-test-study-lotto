@@ -12,7 +12,7 @@ public class WinningResultTest {
     void WinningResult_equalResult_Success() {
         //given
         WinningResult winningResult = new WinningResult(
-                new Lottos(List.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(2, 3, 4, 5, 6, 7)))),
+                Lottos.from(7000),
                 new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7));
         //when
         winningResult.getResult();
