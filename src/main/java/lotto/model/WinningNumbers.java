@@ -10,6 +10,7 @@ public class WinningNumbers {
     private final int bonusNumber;
 
     public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
+        validateDuplicateNumbers(winningNumbers);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -22,5 +23,12 @@ public class WinningNumbers {
     public boolean isBonus(int lottoNumber) {
         return lottoNumber == bonusNumber;
     }
+
+    public void validateDuplicateNumbers(List<Integer> winningNumbers) {
+        if (winningNumbers.stream().distinct().collect(Collectors.toList()).size() != winningNumbers.size()) {
+            throw new IllegalArgumentException("[ERROR] 당첨번호에 중복된 숫자가 발생했습니다. 다시 입력해 주세요.");
+        }
+    }
+
 
 }
