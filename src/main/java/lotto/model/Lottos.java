@@ -30,4 +30,11 @@ public class Lottos {
         }
         return winningResult;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        lottos.stream().forEach(lotto -> sb.append(lotto.getNumbers().toString()+"\n"));
+        return sb.toString();
+    }
 }

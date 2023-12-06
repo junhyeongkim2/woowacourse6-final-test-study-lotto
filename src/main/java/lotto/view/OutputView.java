@@ -9,8 +9,7 @@ public class OutputView {
     }
 
     public static void printLottoNumbers(Lottos lottos) {
-        lottos.getLottos().stream().forEach(lotto -> System.out.println(lotto.getNumbers()));
-        System.out.println();
+        System.out.println(lottos.toString());
     }
 
     public static void printWinningresult(String winningResult) {
