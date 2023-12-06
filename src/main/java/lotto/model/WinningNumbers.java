@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import net.bytebuddy.pool.TypePool.Resolution.Illegal;
 
 public class WinningNumbers {
 
@@ -17,6 +18,7 @@ public class WinningNumbers {
         validateDuplicateWinningNumbers(winningNumbers);
         validateInValidRangeNumbers(winningNumbers);
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);
+        validateWinningNumbersSize(winningNumbers);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -45,6 +47,13 @@ public class WinningNumbers {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER_ERROR_MESSAGE);
         }
+    }
+
+    public void validateWinningNumbersSize(List<Integer> winningNumbers){
+        if(winningNumbers.size()!=6){
+            throw new IllegalArgumentException("[ERROR] 길이가 6이 아닌 당첨번호가 주어졌습니다. 다시 입력해 주세요.");
+        }
+
     }
 
 
