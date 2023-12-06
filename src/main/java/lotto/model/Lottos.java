@@ -2,7 +2,9 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
 
@@ -18,5 +20,14 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public Map<Rank, Integer> compareNumbers(Map<Rank, Integer> winningResult, WinningNumbers winningNumbers) {
+        for (Lotto lotto : lottos) {
+            Rank rank = Rank.valueOf(lotto.compareWinningNumbers(winningNumbers),
+                    lotto.compareBonusNumbers(winningNumbers));
+            winningResult.put(rank, winningResult.get(rank) + 1);
+        }
+        return winningResult;
     }
 }

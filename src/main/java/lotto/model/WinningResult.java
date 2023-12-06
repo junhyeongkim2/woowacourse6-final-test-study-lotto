@@ -19,16 +19,7 @@ public class WinningResult {
     public static WinningResult of(Lottos lottos, WinningNumbers winningNumbers) {
         Map<Rank, Integer> winningResult = new EnumMap<Rank, Integer>(Rank.class);
         initializeResult(winningResult);
-        List<Lotto> lottoList = lottos.getLottos();
-
-        for (int i = 0; i < lottoList.size(); i++) {
-            int matchCount = lottoList.get(i).compareWinningNumbers(winningNumbers);
-            boolean isBonus = lottoList.get(i).compareBonusNumbers(winningNumbers);
-            Rank rank = Rank.valueOf(matchCount, isBonus);
-            winningResult.put(rank, winningResult.get(rank) + 1);
-        }
-
-        return new WinningResult(winningResult);
+        return new WinningResult(lottos.compareNumbers(winningResult, winningNumbers));
     }
 
     public static void initializeResult(Map<Rank, Integer> winningResult) {
