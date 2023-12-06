@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class LottoNumberGenerator {
     public static List<Integer> generateLottoNumbers() {
         List<Integer> numbers = new ArrayList<>();
-        numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+        numbers.addAll(Randoms.pickUniqueNumbersInRange(1, 45, 6));
         sortNumbers(numbers);
         return numbers;
     }
