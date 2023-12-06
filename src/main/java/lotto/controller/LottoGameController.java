@@ -15,30 +15,44 @@ import lotto.view.OutputView;
 import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjection.Split;
 
 public class LottoGameController {
+    private Order order;
+    private Lottos lottos;
+    private WinningResult winningResult;
 
     public void start() {
-        Order order = new Order(repeatUntilValid(() -> InputView.readBuyAmount()));
-        OutputView.printLottoQuanity(order.calculateBuyQuanity());
-        Lottos lottos = createLottos(order);
-        OutputView.printLottoNumbers(lottos);
+        printOrder();
+        printLottos();
+        printResult(readWinningNumbers());
+    }
 
-        WinningNumbers winningNumbers = new WinningNumbers(
+    private WinningNumbers readWinningNumbers() {
+        return new WinningNumbers(
                 repeatUntilValid(() -> Splitor.splitWiningNumbers(InputView.readWinningNumbers())),
                 repeatUntilValid(() -> InputView.readBonusNumber()));
+    }
 
-        WinningResult winningResult = WinningResult.of(lottos, winningNumbers);
+    private void printOrder() {
+        order = new Order(repeatUntilValid(() -> InputView.readBuyAmount()));
+        OutputView.printLottoQuanity(order.calculateBuyQuanity());
+    }
+
+    private void printLottos() {
+        lottos = createLottos(order);
+        OutputView.printLottoNumbers(lottos);
+    }
+
+    private void printResult(WinningNumbers winningNumbers) {
+        winningResult = WinningResult.of(lottos, winningNumbers);
         OutputView.printWinningresult(winningResult.toString());
         OutputView.printTotalProfit(winningResult.calculateTotalProfit(order));
-
-
     }
 
     private Lottos createLottos(Order order) {
-        List<Lotto> lottoList = new ArrayList<>();
+        List<Lotto> tempLottos = new ArrayList<>();
         for (int i = 0; i < order.calculateBuyQuanity(); i++) {
-            lottoList.add(new Lotto(LottoNumberGenerator.generateLottoNumbers()));
+            tempLottos.add(new Lotto(LottoNumberGenerator.generateLottoNumbers()));
         }
-        Lottos lottos = Lottos.from(lottoList);
+        Lottos lottos = Lottos.from(tempLottos);
         return lottos;
     }
 
