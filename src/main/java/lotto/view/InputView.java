@@ -24,6 +24,7 @@ public class InputView {
         System.out.println("\n보너스 번호를 입력해 주세요.");
         String input = Console.readLine();
         validateIsValidRangeBonusNumber(input);
+        validateIsIntegerBonusNumber(input);
         return Integer.parseInt(input);
     }
 
@@ -46,6 +47,14 @@ public class InputView {
     private static void validateIsValidRangeBonusNumber(String input) {
         if (Integer.parseInt(input) < 1 || Integer.parseInt(input) > 45) {
             throw new IllegalArgumentException("[ERROR] 잘못된 범위의 보너스 번호가 입력되었습니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private static void validateIsIntegerBonusNumber(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 숫자가 아닌 보너스 번호가 입력되었습니다. 다시 입력해 주세요.");
         }
     }
 
