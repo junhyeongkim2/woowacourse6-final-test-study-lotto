@@ -17,4 +17,7 @@ public class OutputView {
         System.out.print("\n" + winningResult);
     }
 
+    public static void printTotalProfit(double totalProfit) {
+        System.out.printf("총 수익률은 %.1f%%입니다.", totalProfit);
+    }
 }
