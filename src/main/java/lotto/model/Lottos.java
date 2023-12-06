@@ -12,12 +12,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos from(int buyAmount) {
-        List<Lotto> lottos = new ArrayList<>();
-        int quanity = buyAmount / 1000;
-        for (int i = 0; i < quanity; i++) {
-            lottos.add(new Lotto(LottoNumberGenerator.generateLottoNumbers()));
-        }
+    public static Lottos from(List<Lotto> lottos) {
         return new Lottos(lottos);
     }
 
