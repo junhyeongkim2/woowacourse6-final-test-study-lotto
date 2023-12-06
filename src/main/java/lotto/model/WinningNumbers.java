@@ -13,6 +13,9 @@ public class WinningNumbers {
     private final int END_NUMBER = 45;
     private final List<Integer> winningNumbers;
     private final int bonusNumber;
+    private final int VALID_WINNING_NUMBER_SIZE = 6;
+
+
 
     public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
         validateDuplicateWinningNumbers(winningNumbers);
@@ -50,7 +53,7 @@ public class WinningNumbers {
     }
 
     public void validateWinningNumbersSize(List<Integer> winningNumbers){
-        if(winningNumbers.size()!=6){
+        if(winningNumbers.size()!=VALID_WINNING_NUMBER_SIZE){
             throw new IllegalArgumentException("[ERROR] 길이가 6이 아닌 당첨번호가 주어졌습니다. 다시 입력해 주세요.");
         }
 
