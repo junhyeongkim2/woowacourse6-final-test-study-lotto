@@ -16,7 +16,7 @@ import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjec
 public class LottoGameController {
 
     public void start() {
-        Order order = new Order(Integer.parseInt(InputView.readBuyAmount()));
+        Order order = new Order(InputView.readBuyAmount());
         OutputView.printLottoQuanity(order.calculateBuyQuanity());
 
         List<Lotto> lottoList = new ArrayList<>();
