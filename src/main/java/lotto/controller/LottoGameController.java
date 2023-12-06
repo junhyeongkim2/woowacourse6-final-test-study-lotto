@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 import lotto.model.Lotto;
 import lotto.model.Order;
 import lotto.model.WinningResult;
@@ -16,7 +17,7 @@ import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjec
 public class LottoGameController {
 
     public void start() {
-        Order order = new Order(InputView.readBuyAmount());
+        Order order = new Order(repeatUntilValid(() -> InputView.readBuyAmount()));
         OutputView.printLottoQuanity(order.calculateBuyQuanity());
 
         List<Lotto> lottoList = new ArrayList<>();
@@ -27,14 +28,24 @@ public class LottoGameController {
         Lottos lottos = Lottos.from(lottoList);
         OutputView.printLottoNumbers(lottos);
 
-        WinningNumbers winningNumbers = new WinningNumbers(Splitor.splitWiningNumbers(InputView.readWinningNumbers()),
-                InputView.readBonusNumber());
+        WinningNumbers winningNumbers = new WinningNumbers(
+                repeatUntilValid(() -> Splitor.splitWiningNumbers(InputView.readWinningNumbers())),
+                repeatUntilValid(() -> InputView.readBonusNumber()));
 
         WinningResult winningResult = WinningResult.of(lottos, winningNumbers);
         OutputView.printWinningresult(winningResult.toString());
         OutputView.printTotalProfit(winningResult.calculateTotalProfit(order));
 
 
+    }
+
+    private <T> T repeatUntilValid(Supplier<T> function) {
+        try {
+            return function.get();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return repeatUntilValid(function);
+        }
     }
 
 
