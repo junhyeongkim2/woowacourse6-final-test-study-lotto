@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.model.Lotto;
+import lotto.model.Order;
 import lotto.model.WinningResult;
 import lotto.util.LottoNumberGenerator;
 import lotto.model.Lottos;
@@ -15,12 +16,11 @@ import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjec
 public class LottoGameController {
 
     public void start() {
-        int buyAmount = Integer.parseInt(InputView.readBuyAmount());
-        int quanity = calculateBuyQuanity(buyAmount);
-        OutputView.printLottoQuanity(quanity);
+        Order order = new Order(Integer.parseInt(InputView.readBuyAmount()));
+        OutputView.printLottoQuanity(order.calculateBuyQuanity());
 
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < quanity; i++) {
+        for (int i = 0; i < order.calculateBuyQuanity(); i++) {
             lottoList.add(new Lotto(LottoNumberGenerator.generateLottoNumbers()));
         }
 
@@ -32,13 +32,9 @@ public class LottoGameController {
 
         WinningResult winningResult = WinningResult.of(lottos, winningNumbers);
         OutputView.printWinningresult(winningResult.toString());
-        OutputView.printTotalProfit(winningResult.calculateTotalProfit(buyAmount));
+        OutputView.printTotalProfit(winningResult.calculateTotalProfit(order));
 
 
-    }
-
-    public int calculateBuyQuanity(int buyAmount) {
-        return buyAmount / 1000;
     }
 
 

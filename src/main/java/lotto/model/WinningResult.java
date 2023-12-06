@@ -41,11 +41,11 @@ public class WinningResult {
     }
 
 
-    public double calculateTotalProfit(int buyAmount) {
-        return (calculateTotalPrize(buyAmount) / buyAmount) * 100;
+    public double calculateTotalProfit(Order order) {
+        return (calculateTotalPrize() / order.getBuyAmount()) * 100;
     }
 
-    private double calculateTotalPrize(int buyAmount) {
+    private double calculateTotalPrize() {
         return (double) winningResult.entrySet().stream()
                 .mapToInt(key -> key.getValue() * Rank.valueOf(String.valueOf(key.getKey())).getPrize()).sum();
     }

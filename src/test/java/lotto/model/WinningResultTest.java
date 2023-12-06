@@ -39,7 +39,7 @@ public class WinningResultTest {
                 new WinningNumbers(List.of(5, 6, 7, 11, 12, 13), 9));
         Map<Rank, Integer> result = winningResult.getResult();
         //then
-        double totalProfit = winningResult.calculateTotalProfit(8000);
+        double totalProfit = winningResult.calculateTotalProfit(new Order(8000));
         assertThat(totalProfit).isEqualTo(62.5);
 
     }
