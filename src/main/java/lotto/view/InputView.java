@@ -20,10 +20,11 @@ public class InputView {
         return input;
     }
 
-    public static String readBonusNumber() {
+    public static int readBonusNumber() {
         System.out.println("\n보너스 번호를 입력해 주세요.");
         String input = Console.readLine();
-        return input;
+        validateIsValidRangeBonusNumber(input);
+        return Integer.parseInt(input);
     }
 
     private static void validateReadBuyAmount(String input) {
@@ -39,6 +40,12 @@ public class InputView {
         Matcher matcher = pattern.matcher(input);
         if (!matcher.matches()) {
             throw new IllegalArgumentException("[ERROR] 잘못된 형식의 당첨번호가 입력되었습니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private static void validateIsValidRangeBonusNumber(String input) {
+        if (Integer.parseInt(input) < 1 || Integer.parseInt(input) > 45) {
+            throw new IllegalArgumentException("[ERROR] 잘못된 범위의 보너스 번호가 입력되었습니다. 다시 입력해 주세요.");
         }
     }
 

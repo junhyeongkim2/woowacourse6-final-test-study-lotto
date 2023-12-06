@@ -28,7 +28,7 @@ public class LottoGameController {
         OutputView.printLottoNumbers(lottos);
 
         WinningNumbers winningNumbers = new WinningNumbers(Splitor.splitWiningNumbers(InputView.readWinningNumbers()),
-                Integer.parseInt(InputView.readBonusNumber()));
+                InputView.readBonusNumber());
 
         WinningResult winningResult = WinningResult.of(lottos, winningNumbers);
         OutputView.printWinningresult(winningResult.toString());
