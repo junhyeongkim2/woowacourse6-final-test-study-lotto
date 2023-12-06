@@ -19,13 +19,7 @@ public class LottoGameController {
     public void start() {
         Order order = new Order(repeatUntilValid(() -> InputView.readBuyAmount()));
         OutputView.printLottoQuanity(order.calculateBuyQuanity());
-
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < order.calculateBuyQuanity(); i++) {
-            lottoList.add(new Lotto(LottoNumberGenerator.generateLottoNumbers()));
-        }
-
-        Lottos lottos = Lottos.from(lottoList);
+        Lottos lottos = createLottos(order);
         OutputView.printLottoNumbers(lottos);
 
         WinningNumbers winningNumbers = new WinningNumbers(
@@ -37,6 +31,15 @@ public class LottoGameController {
         OutputView.printTotalProfit(winningResult.calculateTotalProfit(order));
 
 
+    }
+
+    private Lottos createLottos(Order order) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < order.calculateBuyQuanity(); i++) {
+            lottoList.add(new Lotto(LottoNumberGenerator.generateLottoNumbers()));
+        }
+        Lottos lottos = Lottos.from(lottoList);
+        return lottos;
     }
 
     private <T> T repeatUntilValid(Supplier<T> function) {

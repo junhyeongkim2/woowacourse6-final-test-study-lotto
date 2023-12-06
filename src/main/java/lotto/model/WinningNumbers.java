@@ -9,9 +9,9 @@ public class WinningNumbers {
     private final int bonusNumber;
 
     public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
-        validateDuplicateWinningNumbers();
-        validateInValidRangeNumbers();
-        validateDuplicateBonusNumber();
+        validateDuplicateWinningNumbers(winningNumbers);
+        validateInValidRangeNumbers(winningNumbers);
+        validateDuplicateBonusNumber(winningNumbers,bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -24,19 +24,19 @@ public class WinningNumbers {
         return lottoNumber == bonusNumber;
     }
 
-    public void validateDuplicateWinningNumbers() {
+    public void validateDuplicateWinningNumbers(List<Integer> winningNumbers) {
         if (winningNumbers.stream().distinct().collect(Collectors.toList()).size() != winningNumbers.size()) {
             throw new IllegalArgumentException("[ERROR] 당첨번호에 중복된 숫자가 발생했습니다. 다시 입력해 주세요.");
         }
     }
 
-    public void validateInValidRangeNumbers() {
+    public void validateInValidRangeNumbers(List<Integer> winningNumbers) {
         if (!winningNumbers.stream().allMatch(number -> number >= 1 && number <= 45)) {
             throw new IllegalArgumentException("[ERROR] 당첨번호에 중복된 숫자가 발생했습니다. 다시 입력해 주세요.");
         }
     }
 
-    public void validateDuplicateBonusNumber() {
+    public void validateDuplicateBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("[ERROR] 중복된 보너스 번호가 발생했습니다. 다시 입력해 주세요.");
         }
