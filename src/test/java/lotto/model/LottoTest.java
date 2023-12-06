@@ -1,11 +1,11 @@
 package lotto.model;
 
-import lotto.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
@@ -25,4 +25,21 @@ class LottoTest {
     }
 
     // 아래에 추가 테스트 작성 가능
+
+
+    @DisplayName("로또 번호와 winningNumbers 5등 테스트")
+    @Test
+    void compareNumbers_MatchThree_Success() {
+        //given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 7, 8, 9), 10);
+        //when
+        int matchCount = lotto.compareWinningNumbers(winningNumbers);
+        boolean isBonus = lotto.compareBonusNumbers(winningNumbers);
+        //then
+        assertThat(matchCount).isEqualTo(3);
+        assertThat(isBonus).isFalse();
+    }
+
+
 }
